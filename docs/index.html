@@ -79,13 +79,16 @@ Simulation Details and Reports
 (SEPM.PUB)</div></a></h2>
     <div id="text-table-of-contents">
       <ul>
-      <li><a href="#purpose"><span class="toc-section-number">1</span> Purpose</a></li>
+      <li><a href="#research-projects"><span class="toc-section-number">1</span> Research Projects</a><ul>
+      <li><a href="#mle_sim-machine-learning-and-evaluation"><span class="toc-section-number">1.1</span> <strong>MLE_SIM</strong>: Machine learning and evaluation</a></li>
+      <li><a href="#syn_sim-synthetic-data-scenarios"><span class="toc-section-number">1.2</span> <strong>SYN_SIM:</strong> Synthetic data scenarios</a></li>
+      <li><a href="#rdx-real-data-examples"><span class="toc-section-number">1.3</span> <strong>RDX</strong>: Real Data Examples</a></li>
+      </ul></li>
       <li><a href="#r-packages"><span class="toc-section-number">2</span> R Packages</a><ul>
       <li><a href="#sepm-statistical-evaluation-of-prediction-models"><span class="toc-section-number">2.1</span> SEPM: Statistical Evaluation of Prediction Models</a></li>
       <li><a href="#sepm.mle-machine-learning-and-evaluation"><span class="toc-section-number">2.2</span> SEPM.MLE: Machine Learning and Evaluation</a></li>
       <li><a href="#sepm.syn-synthetic-data-generation"><span class="toc-section-number">2.3</span> SEPM.SYN: Synthetic Data Generation</a></li>
-      <li><a href="#sepm.bio-biomarker-data-generation"><span class="toc-section-number">2.4</span> SEPM.BIO: Biomarker Data Generation</a></li>
-      <li><a href="#simple-simultaneous-inference-of-multiple-proportions"><span class="toc-section-number">2.5</span> SIMPle: Simultaneous Inference of Multiple Proportions</a></li>
+      <li><a href="#simple-simultaneous-inference-of-multiple-proportions"><span class="toc-section-number">2.4</span> SIMPle: Simultaneous Inference of Multiple Proportions</a></li>
       </ul></li>
       <li><a href="#references"><span class="toc-section-number">3</span> References</a></li>
       </ul>
@@ -93,36 +96,54 @@ Simulation Details and Reports
 </div>
 
 <div id="main">
-<div id="purpose" class="section level1">
-<h1><span class="header-section-number">1</span> Purpose</h1>
 <p>This R project (SEPM.PUB) contains a collection of research results in the context of model evaluation for machine-learned prediction models.</p>
-<!-- # Projects -->
-<!-- ## MLE_SIM: Machine learning and evaluation -->
-<!-- ## SYN_SIM: Synthetic data scenarios -->
-<!-- ## BIO_SIM: Biomarker data scenarios -->
-<!-- ## RDE: Real Data Examples -->
+<div id="research-projects" class="section level1">
+<h1><span class="header-section-number">1</span> Research Projects</h1>
+<div id="mle_sim-machine-learning-and-evaluation" class="section level2">
+<h2><span class="header-section-number">1.1</span> <strong>MLE_SIM</strong>: Machine learning and evaluation</h2>
+<p>This package includes a wide variety of functions for generation of artifical data consisting of features and labels and additional functions to carry out the complete machine learning pipeline:</p>
+<ol style="list-style-type: lower-alpha">
+<li><strong>Training:</strong> Prediction models are trained by different machine learning algorithms.</li>
+<li><strong>Validation:</strong> A single or multiple models are choosen for an evaluation study.</li>
+<li><strong>Test:</strong> The selected models are evaluated for a sufficently high performance.</li>
+</ol>
+<p>The main novelty of our investigation is that the evaluation study is not restricted to only be conducted for a single (prespecified) model which is the usual recommendation in the machine learning literature. This idea was introduced by <strong>Westphal &amp; Brannath (2019, SMMR)</strong>. As a consequence, statistical methods are needed to adjust for the introduced overoptimism due to the overlap of model selection and evaluation (based on the test data). Several simulation studies have been conducted to assess the benefits and drawbacks of this approach, see <strong>Westphal &amp; Brannath (2019, ICML)</strong>. Detailed reports are provided below:</p>
+<ul>
+<li><a href="https://maxwestphal.github.io/SEPM.PUB/MLE_SIM_ACC.html">MLE_SIM_ACC</a>: Extensive simulation study concerning binary classification accuracy</li>
+<li><strong>MLE_SIM_CPE</strong>: Smaller study concerning co-primary endpoint analysis of sensitivity and specificity (forthcoming)</li>
+</ul>
+</div>
+<div id="syn_sim-synthetic-data-scenarios" class="section level2">
+<h2><span class="header-section-number">1.2</span> <strong>SYN_SIM:</strong> Synthetic data scenarios</h2>
+<p><em>tbc</em></p>
+</div>
+<div id="rdx-real-data-examples" class="section level2">
+<h2><span class="header-section-number">1.3</span> <strong>RDX</strong>: Real Data Examples</h2>
+<p><em>tbc</em></p>
+</div>
 </div>
 <div id="r-packages" class="section level1">
 <h1><span class="header-section-number">2</span> R Packages</h1>
 <div id="sepm-statistical-evaluation-of-prediction-models" class="section level2">
 <h2><span class="header-section-number">2.1</span> SEPM: Statistical Evaluation of Prediction Models</h2>
-<p><a href="https://github.com/maxwestphal/SEPM" class="uri">https://github.com/maxwestphal/SEPM</a></p>
+<p>This R package implements a convinient pipeline of hypothesis formulation and testing in the context of model evaluation and comparison. The development version is available at <a href="https://github.com/maxwestphal/SEPM" class="uri">https://github.com/maxwestphal/SEPM</a>.</p>
 </div>
 <div id="sepm.mle-machine-learning-and-evaluation" class="section level2">
 <h2><span class="header-section-number">2.2</span> SEPM.MLE: Machine Learning and Evaluation</h2>
-<p><a href="https://github.com/maxwestphal/SEPM.MLE" class="uri">https://github.com/maxwestphal/SEPM.MLE</a></p>
+<p>This R package contains all function for the simulations in the machine learning context (MLE_SIM) and is available at <a href="https://github.com/maxwestphal/SEPM.MLE" class="uri">https://github.com/maxwestphal/SEPM.MLE</a>.</p>
 </div>
 <div id="sepm.syn-synthetic-data-generation" class="section level2">
 <h2><span class="header-section-number">2.3</span> SEPM.SYN: Synthetic Data Generation</h2>
-<p><strong>tbc</strong></p>
-</div>
-<div id="sepm.bio-biomarker-data-generation" class="section level2">
-<h2><span class="header-section-number">2.4</span> SEPM.BIO: Biomarker Data Generation</h2>
-<p><strong>tbc</strong></p>
+<p>The main purpose of this package is the investigation of finite sample properties of different selection approaches and multiple testing procedures in model or biomarker evaluation studies. To this end, several functions for the generation of synthetic binary data in various scenarios are provided:</p>
+<ul>
+<li>Least favorable parameter configurations: assessment of frequentist (minimax) properties.</li>
+<li>Bayesian framework: assessment of Bayes risk, e.g. expected risk under different prior distributions.</li>
+<li>Biomarker setting: Sampling under the simple binormal model to emulate the optimal cutpoint problem.</li>
+</ul>
 </div>
 <div id="simple-simultaneous-inference-of-multiple-proportions" class="section level2">
-<h2><span class="header-section-number">2.5</span> SIMPle: Simultaneous Inference of Multiple Proportions</h2>
-<p><strong>tbc</strong></p>
+<h2><span class="header-section-number">2.4</span> SIMPle: Simultaneous Inference of Multiple Proportions</h2>
+<p><em>tbc</em></p>
 </div>
 </div>
 <div id="references" class="section level1">

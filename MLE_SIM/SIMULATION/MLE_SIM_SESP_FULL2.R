@@ -114,7 +114,3 @@ getStatus(reg=reg)
 ### SAVE_RESULTS:
 Sys.sleep(120)
 save_results(reg, JP.data, target=out.path)
-
-#reduceResultsDataTable(800000:800010, function(x)x$result) %>% unwrap()
-
-#R <- unwrap(reduceResultsDataTable(findDone(reg=reg), function(x){x$result}, reg=reg))

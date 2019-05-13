@@ -16,7 +16,7 @@ require(dplyr)
 ### PREPERATION (+++ MODIFY IF NEEDED +++)
 rm(list = ls())                           # clear environment
 
-sim <- "MLE_SIM_ACC_CHECK"                 # simulation name
+sim <- "MLE_SIM_ACC_CHECK"                # simulation name
 Nsim <- 1                                 # number of simulations
 cr <- 0.9                                 # fraction of cores used
 req.packages <- c("SEPM", "SEPM.MLE")     # required packages
