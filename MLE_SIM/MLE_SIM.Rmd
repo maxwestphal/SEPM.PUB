@@ -1,0 +1,31 @@
+---
+title:  |
+  | Simulation Study: 
+  | Machine Learning and Evaluation 
+  | (MLE_SIM)
+author: 
+- Max Westphal <br> mwestphal@uni-bremen.de <br> https://github.com/maxwestphal <br> https://www.linkedin.com/in/maxwestphal/ <br> https://www.anstat.uni-bremen.de/node/22
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+knit: (function(inputFile, encoding) { 
+      out.dir <- file.path(dirname(dirname(dirname(inputFile))), 'docs');
+      dir.create(out.dir);
+      rmarkdown::render(inputFile,
+                        encoding=encoding, 
+                        output_file=file.path(out.dir, 'MLE_SIM_ACC.html')) })
+output: 
+  rmdformats::readthedown:
+    toc_depth: 3
+    toc_float: true
+    number_sections: true
+    df_print: paged
+    code_folding: hide
+    css: styles.css
+    keep_md: yes
+---
+
+# Introduction 
+
+This R project contains the 
+
+
+
