@@ -134,7 +134,7 @@ library(ggplot2)
 library(knitr)
 library(rmdformats)
 library(DT)
-library(SEPM.MLE)
+library(SEPM.MLE) 
 ```
 
 After loading all neccessary packages (assuming they are installed akready), a few global options are set which may alter the appearance of this document.
@@ -177,7 +177,7 @@ cols <- scales::hue_pal()(25) # scales::show_col(scales::hue_pal()(25))
 info <- rbind(c("oracle[learn]", "truly best model", cols[1]),
               c("oracle[train]", "truly best model (before re-training)", cols[21]),
               c("oracle[gamma]", "maximized empirical validation performance + (known) gain due to re-training", cols[24]),
-               c("simple_EN", "elastic net model with highest L1 penalty within 1 SE of best validation model", cols[18]),
+               c("simple", "elastic net model with highest L1 penalty within 1 SE of best validation model", cols[18]),
               c("default", "empirically best validation model", cols[3]),
               c("within1SE", "all models within 1 standard error of best validation model [S.max=sqrt(n.eval)]", cols[9]), 
               c("within1SE[S.max=M]", "all models within 1 SE of best validation model [S.max=M]", cols[11]), 
@@ -233,7 +233,7 @@ preproc_data <- function(data, size=config$subset.size, seed=1337,
                                 oracle.train.sqrt = "oracle[train]",
                                 `se.c=1.sqrt`     = "within1SE",
                                 `rank.r=1.sqrt`   = "default",
-                                `simplest.en..sqrt` = "simple_EN",
+                                `simplest.en..sqrt` = "simple",
                                 `rank.r=100.none` = "S=100")) %>%
     mutate(select.rule = ordered(select.rule, 
                                  levels = info$select.rule)) %>%
@@ -308,9 +308,13 @@ Next we perform several preproccessing steps via the custom function `preproc_da
 
 ```{r preproc, warning=FALSE, message=FALSE, cache=config$data.cache, cache.lazy=FALSE}
 data <- preproc_data(data.in)
+```
+
+```{r act, warning=FALSE, message=FALSE}
 active <- which(info$select.rule %in% unique(data$raw$select.rule))
 str(data, 1)
 ```
+
 
 The following main analysis is based on `r length(unique(data$raw$load.id))` instances of the complete machine learning and evaluation pipeline.
 
@@ -1036,68 +1040,68 @@ data.ext$test %>%
 
 
 
-<!-- ### Selection based on model complexity -->
-<!-- ```{r data_simple, message=FALSE, warning=FALSE, cache=config$load.cache} -->
-<!-- data.simple <- read_data("MLE_SIM_ACC_M50_GLMNET") %>% preproc_data() -->
-<!-- ``` -->
+### Selection based on model complexity
+```{r data_simple, message=FALSE, warning=FALSE, cache=config$load.cache}
+data.simple <- read_data("MLE_SIM_ACC_M50_GLMNET") %>% preproc_data()
+```
 
-<!-- There are different model selection approaches which focus on trading of performance versus model complexity, penalizing the latter. In general, it may however be hard to find such a criterion which is applicable to all candidate models at hand when a diverse set of learning algorithms is used. -->
+There are different model selection approaches which focus on trading of performance versus model complexity, penalizing the latter. In general, it may however be hard to find such a criterion which is applicable to all candidate models at hand when a diverse set of learning algorithms is used.
 
-<!-- We performed a small sensitivity analysis in this regard by considering a traditional selection approach for the elastic net (EN) algorithm. Hereby, the number of nonzero model coefficient is minimized (or the L1-penalty maximized) under the side condition that the validation performance is at most one standard errors below the best validation model. The results concerning this *simple_EN* rule are given below. -->
+We performed a small sensitivity analysis in this regard by considering a traditional selection approach for the elastic net (EN) algorithm. Hereby, the number of nonzero model coefficient is minimized (or the L1-penalty maximized) under the side condition that the validation performance is at most one standard errors below the best validation model. The results concerning this *simple* (also referred to as 1-SE rule) rule are given below.
 
-<!-- Quite surprisingly, this approach is not even beating the *default* approach, neither regarding  the expected model performance nor the rejection rate of the according statistical test. The bias is not shown here, as this method also enables an unbiased estimation ($|\setS|=1$). -->
+Quite surprisingly, this approach is not even beating the *default* approach, neither regarding  the expected model performance nor the rejection rate of the according statistical test. The bias is not shown here, as this method also enables an unbiased estimation ($|\setS|=1$).
 
-<!-- ```{r simple_finaltheta, dpi=config$fig.dpi, fig.width=config$fig.size, fig.height=config$fig.size/3*2, fig.align = "center", message=FALSE, cache=FALSE, warning=FALSE, eval = config$plot} -->
-<!-- active.simple <- which(info$select.rule %in% unique(data.simple$raw$select.rule)) -->
+```{r simple_finaltheta, dpi=config$fig.dpi, fig.width=config$fig.size, fig.height=config$fig.size/3*2, fig.align = "center", message=FALSE, cache=config$figure.cache, warning=FALSE, eval = config$plot}
+active.simple <- which(info$select.rule %in% unique(data.simple$raw$select.rule))
 
-<!-- data.simple$raw  %>% -->
-<!--   filter(n.eval<1000) %>% -->
-<!--   ggplot(aes(select.rule, (final.mod.learn.theta-opt.theta), colour=select.rule)) + -->
-<!--   geom_hline(yintercept=0, cex=1, col="blue") + -->
-<!--   geom_boxplot(cex=1.1, notch=TRUE, notchwidth=0.75, alpha=0.33, outlier.shape = 18, outlier.size=config$small.cex) + -->
-<!--   stat_summary(fun.y = mean, geom = "point", pch=18, cex=config$big.cex, col="red") + -->
-<!--   facet_grid(n.learn ~ n.eval, -->
-<!--              labeller = label_bquote(rows= bold(n[L]==.(n.learn)), -->
-<!--                                      cols= bold(n[E]==.(n.eval)))) + -->
-<!--   labs(y = bquote(bold("Loss in final model performance: ")*vartheta[m*"*"]-vartheta[max]), -->
-<!--        x = bquote(bold("Selection rule")))+  -->
-<!--   scale_color_manual(values = info$col[active.simple], name="Selection rule:  ", -->
-<!--                      labels = paste0(info$select.rule[active.simple], "  ")) + -->
-<!--   owntheme() %+replace%    -->
-<!--   theme(axis.ticks.x = element_blank(), -->
-<!--         axis.text.x  = element_blank(), -->
-<!--         axis.title.x = element_blank()) -->
-<!-- ``` -->
+data.simple$raw  %>%
+  filter(n.eval<1000) %>%
+  ggplot(aes(select.rule, (final.mod.learn.theta-opt.theta), colour=select.rule)) +
+  geom_hline(yintercept=0, cex=1, col="blue") +
+  geom_boxplot(cex=1.1, notch=TRUE, notchwidth=0.75, alpha=0.33, outlier.shape = 18, outlier.size=config$small.cex) +
+  stat_summary(fun.y = mean, geom = "point", pch=18, cex=config$big.cex, col="red") +
+  facet_grid(n.learn ~ n.eval,
+             labeller = label_bquote(rows= bold(n[L]==.(n.learn)),
+                                     cols= bold(n[E]==.(n.eval)))) +
+  labs(y = bquote(bold("Loss in final model performance: ")*vartheta[m*"*"]-vartheta[max]),
+       x = bquote(bold("Selection rule")))+
+  scale_color_manual(values = info$col[active.simple], name="Selection rule:  ",
+                     labels = paste0(info$select.rule[active.simple], "  ")) +
+  owntheme() %+replace%
+  theme(axis.ticks.x = element_blank(),
+        axis.text.x  = element_blank(),
+        axis.title.x = element_blank())
+```
 
 
-<!-- ```{r simple_rr, dpi=config$fig.dpi, fig.width=config$fig.size, fig.height=config$fig.size/3*2, fig.align = "center", message=FALSE, cache=FALSE, warning=FALSE, eval = config$plot} -->
-<!-- y.breaks <- seq(0, 1, 0.1) -->
-<!-- cols.act.simple <- info$col[active.simple]; names(cols.act) <- info$select.rule[active.simple] -->
-<!-- shapes.act.simple <- info$pch[active.simple]; names(shapes.act) <- info$select.rule[active.simple] -->
+```{r simple_rr, dpi=config$fig.dpi, fig.width=config$fig.size, fig.height=config$fig.size/3*2, fig.align = "center", message=FALSE, cache=config$figure.cache, warning=FALSE, eval = config$plot}
+y.breaks <- seq(0, 1, 0.1)
+cols.act.simple <- info$col[active.simple]; names(cols.act) <- info$select.rule[active.simple]
+shapes.act.simple <- info$pch[active.simple]; names(shapes.act) <- info$select.rule[active.simple]
 
-<!-- ## overall rejection rate (fpr+tpr): -->
-<!-- data.simple$test %>% -->
-<!--   filter(n.eval<1000) %>% -->
-<!--   ggplot() + -->
-<!--   geom_hline(yintercept = c(0, 1),    col=c("darkgrey"), lty=1, cex=0.75) + -->
-<!--   geom_vline(xintercept = 0,   col="black", lty=2, cex=0.75) + -->
-<!--   geom_line( aes(shift, rr, color=select.rule), alpha=0.8, cex=0.75) + -->
-<!--   geom_point(aes(shift, rr, color=select.rule, pch=select.rule), alpha=0.8, cex=config$small.cex/2*3) + -->
-<!--   geom_hline(yintercept = c(0.025), col=c("darkred"), lty=2, cex=0.75) + -->
-<!--   facet_grid(n.learn ~ n.eval, -->
-<!--              labeller = label_bquote(rows= bold(n[L]==.(n.learn)), -->
-<!--                                      cols= bold(n[E]==.(n.eval)))) + -->
-<!--   labs(x = bquote(delta == vartheta[max] - vartheta[0]), -->
-<!--        y = bquote(bold("Rejection rate: ")* pi(delta)==P(varphi[m*"*"]==1~"|"~delta))) + -->
-<!--   scale_y_continuous(limits=range(y.breaks), breaks=y.breaks) + -->
-<!--   scale_shape_manual(values=shapes.act.simple, name="Selection rule:  ", -->
-<!--                      labels = paste0(info$select.rule[active.simple], "  ")) + -->
-<!--   scale_color_manual(values=cols.act.simple, name="Selection rule:  ", -->
-<!--                      labels = paste0(info$select.rule[active.simple], "  ")) + -->
-<!--   owntheme() %+replace% -->
-<!--   theme(axis.text.x = element_text(size=config$text.size/3*2)) -->
+## overall rejection rate (fpr+tpr):
+data.simple$test %>%
+  filter(n.eval<1000) %>%
+  ggplot() +
+  geom_hline(yintercept = c(0, 1),    col=c("darkgrey"), lty=1, cex=0.75) +
+  geom_vline(xintercept = 0,   col="black", lty=2, cex=0.75) +
+  geom_line( aes(shift, rr, color=select.rule), alpha=0.8, cex=0.75) +
+  geom_point(aes(shift, rr, color=select.rule, pch=select.rule), alpha=0.8, cex=config$small.cex/2*3) +
+  geom_hline(yintercept = c(0.025), col=c("darkred"), lty=2, cex=0.75) +
+  facet_grid(n.learn ~ n.eval,
+             labeller = label_bquote(rows= bold(n[L]==.(n.learn)),
+                                     cols= bold(n[E]==.(n.eval)))) +
+  labs(x = bquote(delta == vartheta[max] - vartheta[0]),
+       y = bquote(bold("Rejection rate: ")* pi(delta)==P(varphi[m*"*"]==1~"|"~delta))) +
+  scale_y_continuous(limits=range(y.breaks), breaks=y.breaks) +
+  scale_shape_manual(values=shapes.act.simple, name="Selection rule:  ",
+                     labels = paste0(info$select.rule[active.simple], "  ")) +
+  scale_color_manual(values=cols.act.simple, name="Selection rule:  ",
+                     labels = paste0(info$select.rule[active.simple], "  ")) +
+  owntheme() %+replace%
+  theme(axis.text.x = element_text(size=config$text.size/3*2))
 
-<!-- ``` -->
+```
 
 
 <!-- ### Limiting the number of models? -->
@@ -1248,9 +1252,11 @@ Learning, Long Beach, California, PMLR 97, forthcoming 2019.
 ## Software
 
 - SEPM (Statistical Evaluation of Prediction Models, R package): https://github.com/maxwestphal/SEPM
-- SEPM.MLE (Statistical Evaluation of Prediction Models - machine learning and evaluation, R package): https://github.com/maxwestphal/SEPM.MLE
-- SEPM.PUB (Statistical Evaluation of Prediction Models - public analysis reports and simulation details, R project): https://github.com/maxwestphal/SEPM.MLE
+- SEPM.MLE (Statistical Evaluation of Prediction Models - Machine Learning and Evaluation, R package): https://github.com/maxwestphal/SEPM.MLE
+- SEPM.SYN (Statistical Evaluation of Prediction Models - Synthetic Data Generation, R package): https://github.com/maxwestphal/SEPM.SYN
+- SEPM.PUB (Statistical Evaluation of Prediction Models - Simulation Details and Reports, R project): https://github.com/maxwestphal/SEPM.MLE
 
 ## Version History
 
 - 13/05/2019 - Version 1: Initial release
+- 16/05/2019 - Version 2: Added 'selection on based on model complexity'
