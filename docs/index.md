@@ -5,7 +5,7 @@ title:  |
   | (SEPM.PUB)
 author: 
 - Max Westphal <br> mwestphal@uni-bremen.de <br> https://github.com/maxwestphal <br> https://www.linkedin.com/in/maxwestphal/ <br> https://www.anstat.uni-bremen.de/node/22
-date: "13 May, 2019"
+date: "07 June, 2019"
 knit: (function(inputFile, encoding) { 
       out.dir <- file.path(dirname(inputFile), 'docs');
       dir.create(out.dir);
@@ -29,7 +29,7 @@ This R project (SEPM.PUB) contains a collection of research results in the conte
 
 ## **MLE_SIM**: Machine learning and evaluation
 
-This package includes a wide variety of functions for generation of artifical data consisting of features and labels and additional functions to carry out the complete machine learning pipeline:
+This project includes a wide variety of functions for generation of artifical data consisting of features and labels and additional functions to carry out the complete machine learning pipeline:
 
 (a) **Training:** Prediction models are trained by different machine learning algorithms.
 (b) **Validation:** A single or multiple models are choosen for an evaluation study.
@@ -40,15 +40,19 @@ The main novelty of our investigation is that the evaluation study is not restri
 - [MLE_SIM_ACC](https://maxwestphal.github.io/SEPM.PUB/MLE_SIM_ACC.html): Extensive simulation study concerning binary classification accuracy 
 - **MLE_SIM_CPE**: Smaller study concerning co-primary endpoint analysis of sensitivity and specificity (forthcoming)
 
+## **SYN_SIM:** Synthetic Data Scenarios
 
-
-## **SYN_SIM:** Synthetic data scenarios
-
-*tbc*
+Forthcoming...
 
 ## **RDX**: Real Data Examples
 
-*tbc*
+The two available real data examples are described in **Westphal & Brannath (2019, SMMR)** and are currently only available as part of the older **EOMPM** project (see below). At some point these will be recompiled for easier access. 
+
+## **EOMPM**: Evaluation of multiple prediction models
+
+Numerical experiments related to the publication **Westphal & Brannath (2019, SMMR)**, described in detail at https://github.com/maxwestphal/EOMPM.
+
+
 
 # R Packages
 
@@ -71,10 +75,10 @@ To this end, several functions for the generation of synthetic binary data in va
 
 ## SIMPle: Simultaneous Inference of Multiple Proportions
 
-*tbc*
+Forthcoming...
 
 # References 
 
 - **Westphal & Brannath (2019, SMMR):** Westphal, M. and Brannath, W. Evaluation of multiple prediction models: a novel view on model selection and performance assessment. Statistical Methods in Medical Research, forthcoming 2019.
-- **Westphal & Brannath (2019, ICML):** Westphal, M. and Brannath, W. Improving Model Selection by Employing the Test Data. In Proceedings of the 36th International Conference on Machine
-Learning, Long Beach, California, PMLR 97, forthcoming 2019. 
+- [**Westphal & Brannath (2019, ICML):**](http://proceedings.mlr.press/v97/westphal19a.html) Westphal, M. and Brannath, W. Improving Model Selection by Employing the Test Data. In Proceedings of the 36th International Conference on Machine
+Learning, Long Beach, California, PMLR 97, 2019. 
