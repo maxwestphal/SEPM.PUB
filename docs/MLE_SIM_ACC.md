@@ -5,7 +5,7 @@ title:  |
   | (MLE_SIM_ACC)
 author: 
 - Max Westphal <br> mwestphal@uni-bremen.de <br> https://github.com/maxwestphal <br> https://www.linkedin.com/in/maxwestphal/ <br> https://www.anstat.uni-bremen.de/node/22
-date: "16 May, 2019"
+date: "11 June, 2019"
 knit: (function(inputFile, encoding) { 
       out.dir <- file.path(dirname(dirname(dirname(inputFile))), 'docs');
       dir.create(out.dir);
@@ -23,9 +23,9 @@ output:
     keep_md: yes
 ---
 
-%usepackage_latex()
+<!-- usepackage_latex() -->
 
-%% Operators - Start
+<!-- Operators - Start -->
 \newcommand{\pr}{\mathbb{P}}
 \newcommand{\E}{\mathbb{E}}
 \newcommand{\ND}{\bar{D}}
@@ -101,7 +101,7 @@ output:
 # Introduction 
 Prediction models are everywhere. They predict if an email contains spam, forecast tommorrow's stock prices or diagnose if a patient is diseased. Such models take some feature data as input and return a prediction of the target variable. Features could be specific word frequencies, recent market movements or X-ray images. More often than not, machine-learning (ML) algorithms are used to train such models from data. An ML algorithm takes some data, a collection of feature-label pairs, as input and outputs a prediction model. Once a model has been trained it can be employed into practice. Theoretically...
 
-Of course, things are rarely that simple. In practice, it is never known beforehand which algorithm and hyperparameter choices lead to the model with the highest performance. That is why in practice usually many different approaches are (rightly) tried out and compared. Unfortunately, if many such comparisons are conducted it is hard to distinguish between truly good models and a model that only empirically appears to perform well enough. This is in particular true, when the amount of available data is limited. Thus, for serious applications, a rigorous evaluation before implementation in practice becomes is very important. After all, while there are certainly benefits when implementing a good model there are also costs when implementing a bad one.
+Of course, things are rarely that simple. In practice, it is never known beforehand which algorithm and hyperparameter choices lead to the model with the highest performance. That is why in practice usually many different approaches are (rightly) tried out and compared. Unfortunately, if many such comparisons are conducted it is hard to distinguish between truly good models and a model that only empirically appears to perform well enough. This is in particular true, when the amount of available data is limited. Thus, for serious applications, a rigorous evaluation before implementation in practice becomes very important. After all, while there are certainly benefits when implementing a good model there are also costs when implementing a bad one.
 
 This document contains the results of an extensive simulation study regarding the selection and evaluation of machine learned prediction models described by **Westphal & Brannath (2019, ICML)**. The main purpose of this document is to act as a supplementary report of results. It shows several additional analyses which could not be included in the recent publication. Moreover, this report may also serve as a starting point for non-technical readers as complex mathematical notation and theoretical details are avoided whenever possible. For more detailed information regarding the employed methods we refer the reader to **Westphal & Brannath (2019, ICML)** and our previous work **Westphal & Brannath (2019, SMMR)**. 
 
@@ -116,16 +116,16 @@ The usual recommendation in applied machine learning is to select a prediction m
 knitr::include_graphics('figures/ML_flowchart_FINAL_SINGLE_tagged.png')
 ```
 
-![](figures/ML_flowchart_FINAL_SINGLE_tagged.png)<!-- -->
+<img src="figures/ML_flowchart_FINAL_SINGLE_tagged.png" width="9993" />
 
-The main goal of this simulation study is to compare this *default* model selection approach with other strategies. In particular, we highlight differences to selecting multiple promising models (based on the validation data) for a simultaneous evaluation on the test data. This novel approach to assess several models at once allows to utilise the test data for model selection. In contrast, model selection and evaluation are usually stricly seperated to avoid selection-induced bias. Our approach involves countering this overoptimism with a particular simultaneous test procedure, the so-called maxT-approach which is based on approximate joint distribution of performance estimates. This expanded machine-learning and evaluation pipeline is shown below.
+The main goal of this simulation study is to compare this *default* model selection approach with other strategies. In particular, we highlight differences to selecting multiple promising models (based on the validation data) for a simultaneous evaluation on the test data. This novel approach to assess several models at once allows to utilise the test data for model selection. In contrast, model selection and evaluation are usually stricly seperated to avoid selection-induced bias. Our approach involves countering this overoptimism with a particular simultaneous test procedure, the so-called maxT-approach, which is based on approximate joint distribution of performance estimates. This expanded machine-learning and evaluation pipeline is shown below.
 
 
 ```r
 knitr::include_graphics('figures/ML_flowchart_FINAL_MULTIPLE_tagged.png')
 ```
 
-![](figures/ML_flowchart_FINAL_MULTIPLE_tagged.png)<!-- -->
+<img src="figures/ML_flowchart_FINAL_MULTIPLE_tagged.png" width="9995" />
 
 ## Setup
 
@@ -144,7 +144,7 @@ library(DT)
 library(SEPM.MLE) 
 ```
 
-After loading all neccessary packages (assuming they are installed akready), a few global options are set which may alter the appearance of this document.
+After loading all neccessary packages (assuming they are installed already), a few global options are set which may alter the appearance of this document.
 
 
 ```r
@@ -588,7 +588,7 @@ In this section we investigate how well the true final model performance (accura
 
 ### Naive performance estimation
 
-The obvious naive estimator for classification accuracy is just the sample proportion of correct predictions. In our simulations we implemented a slightly different naive estimator by adding two pseudo-observations (1 correct and 1 false prediction) to the observated evaluation data before calculating this sample proportion. This procedure has a Bayesian motivation and results in a slightly more conservative (downward biased) estimate. The main reason for using this estimator was to prevent a singular covariance matrix due to estimates $\thetahat_m \{0,1\}$. The sample mean of deviations (red) is an estimator for the bias of the estimator. The bias observed for the *default* approach (evaluate only single model) results only from this modification.
+The obvious naive estimator for classification accuracy is just the sample proportion of correct predictions. In our simulations we implemented a slightly different naive estimator by adding two pseudo-observations (1 correct and 1 false prediction) to the observated evaluation data before calculating this sample proportion. This procedure has a Bayesian motivation and results in a slightly more conservative (downward biased) estimate. The main reason for using this estimator was to prevent a singular covariance matrix due to estimates $\thetahat_m \{0,1\}$. The sample mean of deviations (red) is an estimator for the bias of the estimator. The slight downward bias observed for the *default* approach (evaluate only single model) results only from this modification.
 
 
 ```r
@@ -1229,7 +1229,7 @@ Learning, Long Beach, California, PMLR 97, forthcoming 2019.
 
 - SEPM (Statistical Evaluation of Prediction Models, R package): https://github.com/maxwestphal/SEPM
 - SEPM.MLE (Statistical Evaluation of Prediction Models - Machine Learning and Evaluation, R package): https://github.com/maxwestphal/SEPM.MLE
-- SEPM.SYN (Statistical Evaluation of Prediction Models - Synthetic Data Generation, R package): https://github.com/maxwestphal/SEPM.SYN
+<!-- - SEPM.SYN (Statistical Evaluation of Prediction Models - Synthetic Data Generation, R package): https://github.com/maxwestphal/SEPM.SYN -->
 - SEPM.PUB (Statistical Evaluation of Prediction Models - Simulation Details and Reports, R project): https://github.com/maxwestphal/SEPM.MLE
 
 ## Version History

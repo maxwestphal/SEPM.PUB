@@ -23,9 +23,9 @@ output:
     keep_md: yes
 ---
 
-%usepackage_latex()
+<!-- usepackage_latex() -->
 
-%% Operators - Start
+<!-- Operators - Start -->
 \newcommand{\pr}{\mathbb{P}}
 \newcommand{\E}{\mathbb{E}}
 \newcommand{\ND}{\bar{D}}
@@ -101,7 +101,7 @@ output:
 # Introduction 
 Prediction models are everywhere. They predict if an email contains spam, forecast tommorrow's stock prices or diagnose if a patient is diseased. Such models take some feature data as input and return a prediction of the target variable. Features could be specific word frequencies, recent market movements or X-ray images. More often than not, machine-learning (ML) algorithms are used to train such models from data. An ML algorithm takes some data, a collection of feature-label pairs, as input and outputs a prediction model. Once a model has been trained it can be employed into practice. Theoretically...
 
-Of course, things are rarely that simple. In practice, it is never known beforehand which algorithm and hyperparameter choices lead to the model with the highest performance. That is why in practice usually many different approaches are (rightly) tried out and compared. Unfortunately, if many such comparisons are conducted it is hard to distinguish between truly good models and a model that only empirically appears to perform well enough. This is in particular true, when the amount of available data is limited. Thus, for serious applications, a rigorous evaluation before implementation in practice becomes is very important. After all, while there are certainly benefits when implementing a good model there are also costs when implementing a bad one.
+Of course, things are rarely that simple. In practice, it is never known beforehand which algorithm and hyperparameter choices lead to the model with the highest performance. That is why in practice usually many different approaches are (rightly) tried out and compared. Unfortunately, if many such comparisons are conducted it is hard to distinguish between truly good models and a model that only empirically appears to perform well enough. This is in particular true, when the amount of available data is limited. Thus, for serious applications, a rigorous evaluation before implementation in practice becomes very important. After all, while there are certainly benefits when implementing a good model there are also costs when implementing a bad one.
 
 This document contains the results of an extensive simulation study regarding the selection and evaluation of machine learned prediction models described by **Westphal & Brannath (2019, ICML)**. The main purpose of this document is to act as a supplementary report of results. It shows several additional analyses which could not be included in the recent publication. Moreover, this report may also serve as a starting point for non-technical readers as complex mathematical notation and theoretical details are avoided whenever possible. For more detailed information regarding the employed methods we refer the reader to **Westphal & Brannath (2019, ICML)** and our previous work **Westphal & Brannath (2019, SMMR)**. 
 
@@ -115,7 +115,7 @@ The usual recommendation in applied machine learning is to select a prediction m
 knitr::include_graphics('figures/ML_flowchart_FINAL_SINGLE_tagged.png')
 ```
 
-The main goal of this simulation study is to compare this *default* model selection approach with other strategies. In particular, we highlight differences to selecting multiple promising models (based on the validation data) for a simultaneous evaluation on the test data. This novel approach to assess several models at once allows to utilise the test data for model selection. In contrast, model selection and evaluation are usually stricly seperated to avoid selection-induced bias. Our approach involves countering this overoptimism with a particular simultaneous test procedure, the so-called maxT-approach which is based on approximate joint distribution of performance estimates. This expanded machine-learning and evaluation pipeline is shown below.
+The main goal of this simulation study is to compare this *default* model selection approach with other strategies. In particular, we highlight differences to selecting multiple promising models (based on the validation data) for a simultaneous evaluation on the test data. This novel approach to assess several models at once allows to utilise the test data for model selection. In contrast, model selection and evaluation are usually stricly seperated to avoid selection-induced bias. Our approach involves countering this overoptimism with a particular simultaneous test procedure, the so-called maxT-approach, which is based on approximate joint distribution of performance estimates. This expanded machine-learning and evaluation pipeline is shown below.
 
 ```{r diagram_multiple, fig.show='hold'}
 knitr::include_graphics('figures/ML_flowchart_FINAL_MULTIPLE_tagged.png')
@@ -137,7 +137,7 @@ library(DT)
 library(SEPM.MLE) 
 ```
 
-After loading all neccessary packages (assuming they are installed akready), a few global options are set which may alter the appearance of this document.
+After loading all neccessary packages (assuming they are installed already), a few global options are set which may alter the appearance of this document.
 
 ```{r config, include=TRUE}
 ## set global options:
@@ -621,7 +621,7 @@ data$raw %>%
 # config$title.size = 30; config$text.size = 24; config$big.cex = 9; config$small.cex = 3
 # 
 # data1n <- data$raw %>% filter(M==200) %>% mutate(type="naive")
-# data1c <- data1n %>% mutate(rel.dev = rel.dev.c, type="corrected") 
+# data1c <- data1n %>% mutate(rel.dev = rel.dev.c, type="corrected")
 # mean(data1n$job.id == data1c$job.id)
 # data2 <- rbind(data1n, data1c) %>% mutate(type = factor(type, levels=c("naive", "corrected")))
 # 
@@ -637,10 +637,10 @@ data$raw %>%
 #   facet_grid(type ~ n.eval,
 #              labeller = label_bquote(rows= bold(.(as.character(type))),
 #                                      cols= bold(n[E]==.(n.eval)))) +
-#   labs(y = bquote(bold("Relative deviation: ")*(hat(vartheta)[m*"*"]-vartheta[m*"*"])/vartheta[m*"*"]))+ 
+#   labs(y = bquote(bold("Relative deviation: ")*(hat(vartheta)[m*"*"]-vartheta[m*"*"])/vartheta[m*"*"]))+
 #     scale_color_manual(values = info$col[bias.active], name="Selection rule:  ",
 #                      labels = paste0(info$select.rule[bias.active], "  ")) +
-#   owntheme() %+replace%   
+#   owntheme() %+replace%
 #   theme(axis.ticks.x = element_blank(),
 #         axis.text.x  = element_blank(),
 #         axis.title.x = element_blank(),
@@ -1253,7 +1253,7 @@ Learning, Long Beach, California, PMLR 97, forthcoming 2019.
 
 - SEPM (Statistical Evaluation of Prediction Models, R package): https://github.com/maxwestphal/SEPM
 - SEPM.MLE (Statistical Evaluation of Prediction Models - Machine Learning and Evaluation, R package): https://github.com/maxwestphal/SEPM.MLE
-- SEPM.SYN (Statistical Evaluation of Prediction Models - Synthetic Data Generation, R package): https://github.com/maxwestphal/SEPM.SYN
+<!-- - SEPM.SYN (Statistical Evaluation of Prediction Models - Synthetic Data Generation, R package): https://github.com/maxwestphal/SEPM.SYN -->
 - SEPM.PUB (Statistical Evaluation of Prediction Models - Simulation Details and Reports, R project): https://github.com/maxwestphal/SEPM.MLE
 
 ## Version History

@@ -40,7 +40,7 @@ The main novelty of our investigation is that the evaluation study is not restri
 - [MLE_SIM_ACC](https://maxwestphal.github.io/SEPM.PUB/MLE_SIM_ACC.html): Extensive simulation study concerning binary classification accuracy 
 - **MLE_SIM_CPE**: Smaller study concerning co-primary endpoint analysis of sensitivity and specificity (forthcoming)
 
-## **SYN_SIM:** Synthetic Data Scenarios
+## **SYN_SIM**: Synthetic Data Scenarios
 
 Forthcoming...
 
@@ -73,7 +73,7 @@ To this end, several functions for the generation of synthetic binary data in va
 - Bayesian framework: assessment of Bayes risk, e.g. expected risk under different prior distributions.
 - Biomarker setting: Sampling under the simple binormal model to emulate the optimal cutpoint problem.
 
-## SIMPle: Simultaneous Inference of Multiple Proportions
+## SIMPle: Simultaneous Inference for Multiple Proportions
 
 Forthcoming...
 
