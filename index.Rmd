@@ -1,8 +1,9 @@
 ---
-title:  |
+title:  | 
   | Statistical Evaluation of Prediction Models:
   | Simulation Details and Reports
   | (SEPM.PUB)
+pagetitle: SEPM.PUB
 author: 
 - Max Westphal <br> mwestphal@uni-bremen.de <br> https://github.com/maxwestphal <br> https://www.linkedin.com/in/maxwestphal/ <br> https://www.anstat.uni-bremen.de/node/22
 date: "`r format(Sys.time(), '%d %B, %Y')`"
@@ -27,58 +28,85 @@ This R project (SEPM.PUB) contains a collection of research results in the conte
 
 # Research Projects
 
-## **MLE_SIM**: Machine learning and evaluation
+## **EOMPM**: Evaluation of Multiple Prediction Models
 
-This project includes a wide variety of functions for generation of artifical data consisting of features and labels and additional functions to carry out the complete machine learning pipeline:
+Numerical experiments related to the publication **Westphal & Brannath (2019, SMMR)**. A detailed description is provided at https://github.com/maxwestphal/EOMPM.
+
+## **IMS**: Improving Model Selection
+
+In this project, the complete machine learning and evluation pipeline is emulated:
 
 (a) **Training:** Prediction models are trained by different machine learning algorithms.
 (b) **Validation:** A single or multiple models are choosen for an evaluation study.
 (c) **Test:** The selected models are evaluated for a sufficently high performance. 
 
-The main novelty of our investigation is that the evaluation study is not restricted to only be conducted for a single (prespecified) model which is the usual recommendation in the machine learning literature. This idea was introduced by **Westphal & Brannath (2019, SMMR)**. As a consequence, statistical methods are needed to adjust for the introduced overoptimism due to the overlap of model selection and evaluation (based on the test data). Several simulation studies have been conducted to assess the benefits and drawbacks of this approach, see **Westphal & Brannath (2019, ICML)**. Detailed reports are provided below:
+The main novelty of our investigation is that the evaluation study is not restricted to only be conducted for a single (prespecified) model which is the usual recommendation in the machine learning literature. This idea was introduced by **Westphal & Brannath (2019, SMMR)**. As a consequence, statistical methods are needed to adjust for the introduced overoptimism due to the overlap of model selection and evaluation (based on the test data). Several simulation studies have been conducted to assess the benefits and drawbacks of this approach, see **Westphal & Brannath (2019, ICML)**. 
 
-- [MLE_SIM_ACC](https://maxwestphal.github.io/SEPM.PUB/MLE_SIM_ACC.html): Extensive simulation study concerning binary classification accuracy 
-- **MLE_SIM_CPE**: Smaller study concerning co-primary endpoint analysis of sensitivity and specificity (forthcoming)
+- [MLE_SIM_ACC](https://maxwestphal.github.io/SEPM.PUB/MLE_SIM_ACC.html): Extensive simulation study concerning the assessment of the overall accuracy of binary classifiers
 
-## **SYN_SIM**: Synthetic Data Scenarios
+
+## **SIMPle**: Simultaneous Inference for Multiple Proportions
+
+Numerical experiments related to the publication **Westphal (2019, forthcoming)**: Assessment of coverage probability of multivariate Beta-Binomial credible regions under different prior distributions.
 
 Forthcoming...
 
-## **RDX**: Real Data Examples
 
-The two available real data examples are described in **Westphal & Brannath (2019, SMMR)** and are currently only available as part of the older **EOMPM** project (see below). At some point these will be recompiled for easier access. 
+## **CPE**: Co-Primary Endpoint Analysis
 
-## **EOMPM**: Evaluation of multiple prediction models
+This is a follow-up of the **IMS** project. Again, we investiagte how to improve model evaluation studies in the supervised machine learning context. Instead of looking at the overall accuracy of binary classifiers, we now focus on the so-called co-primary endpoint analysis. Hereby, sensitivity and specificity are both assessed simultaneously.
 
-Numerical experiments related to the publication **Westphal & Brannath (2019, SMMR)**, described in detail at https://github.com/maxwestphal/EOMPM.
+- **MLE_SIM_CPE**: Simulation study concerning co-primary endpoint analysis of sensitivity and specificity (forthcoming)
 
+
+# Real Data Examples
+
+So far, two real data examples are available, both described by **Westphal & Brannath (2019, SMMR)**. They are currently only available as part of the older [**EOMPM**](https://github.com/maxwestphal/EOMPM) project. At some point these will be recompiled for easier access... 
 
 
 # R Packages
 
 ## SEPM: Statistical Evaluation of Prediction Models
 
-This R package implements a convinient pipeline of hypothesis formulation and testing in the context of model evaluation and comparison. The development version is available at https://github.com/maxwestphal/SEPM.
+The [SEPM](https://github.com/maxwestphal/SEPM) package implements a convinient pipeline of hypothesis formulation and testing for the purpose of model evaluation and comparison studies. 
 
-## SEPM.MLE: Machine Learning and Evaluation
-
-This R package contains all function for the simulations in the machine learning context (MLE_SIM) and is available at https://github.com/maxwestphal/SEPM.MLE.
-
-## SEPM.SYN: Synthetic Data Generation
-
-The main purpose of this package is the investigation of finite sample properties of different selection approaches and multiple testing procedures in model or biomarker evaluation studies.
-To this end, several functions for the generation of synthetic binary data in various scenarios are provided: 
-
-- Least favorable parameter configurations: assessment of frequentist (minimax) properties.
-- Bayesian framework: assessment of Bayes risk, e.g. expected risk under different prior distributions.
-- Biomarker setting: Sampling under the simple binormal model to emulate the optimal cutpoint problem.
+NOTE: This package is still under development - no warranty!
 
 ## SIMPle: Simultaneous Inference for Multiple Proportions
 
-Forthcoming...
+The [SIMPle](https://github.com/maxwestphal/SIMPle) package allows the specification and data based update of a multivariate Beta (mBeta) model as described by **Westphal (2019, forthcoming)**
+
+NOTE: This package is still under development - no warranty!
+
+## DGN: Data Generation
+
+Many custom functions for the generation of (sythetic) binary data have been developed. Currently they are availabe in the packages listed below, with minimal documentation. Our main goal is to generate data in order to investigate finite sample properties of different selection approaches and multiple testing procedures in model or biomarker evaluation studies as described above.
+
+### SEPM.MLE: Machine Learning and Evaluation
+
+This [SEPM.MLE](https://github.com/maxwestphal/SEPM.MLE) package contains all functions for the simulations in the machine learning context, i.e. for generation of feature-label data, hyperparameter generation and model training.
+
+### SEPM.SYN: Synthetic Data
+
+The [SEPM.SYN](https://github.com/maxwestphal/SEPM.SYN) package allows sampling from different generative mBeta distributions for an assessment of the Bayes risk, i.e. the expected risk under different priors.
+
+### SEPM.LFC: Least Favorable Parameter Configurations
+
+The [SEPM.LFC](https://github.com/maxwestphal/SEPM.LFC) package allows sampling from least favorable parameter configuration for an assessment of frequentist (minimax) properties.
+
+### SEPM.BIO: Biomarker Data
+
+Goal: Sampling under the simplistic binormal model to emulate the optimal cutpoint problem. Forthcoming...
+
+
 
 # References 
 
+## Scientific Publications
+
 - **Westphal & Brannath (2019, SMMR):** Westphal, M. and Brannath, W. Evaluation of multiple prediction models: a novel view on model selection and performance assessment. Statistical Methods in Medical Research, forthcoming 2019.
 - [**Westphal & Brannath (2019, ICML):**](http://proceedings.mlr.press/v97/westphal19a.html) Westphal, M. and Brannath, W. Improving Model Selection by Employing the Test Data. In Proceedings of the 36th International Conference on Machine
-Learning, Long Beach, California, PMLR 97, 2019. 
+Learning, Long Beach, California, PMLR 97, 2019.
+- **Westphal (2019, forthcoming):** Simultaneous Inference for Multiple Proportions: A Multivariate Beta-Binomial Model. Submitted for Publication, 2019.
+
+
