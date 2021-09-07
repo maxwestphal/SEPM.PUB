@@ -38,6 +38,7 @@ a {
 }
 
 
+
 /* (4) from #9F2042 to --main2 */
 #main .nav-pills > li > a:hover {
     background-color: #f02800;
@@ -59,9 +60,10 @@ h1,h2,h3,h4,h5,h6,legend{
 
 #table-of-contents header{
     color: #f02800;
+    background-color:  #f02800;
 }
 
-#table-of-contents h2{
+#sidebar h2{
     background-color:  #f02800;
 }
 
