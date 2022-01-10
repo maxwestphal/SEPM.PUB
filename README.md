@@ -1,3 +1,145 @@
-# Statistical Evaluation of Prediction Models: <br/> Simulation Details and Reports <br/> (SEPM.PUB)
+# SEPM.PUB: Statistical Evaluation of Prediction Models - Published Results
 
-This R project contains a collection of research results in the context of model evaluation for machine-learned prediction models. An overview over different subprojects and the employed R packages is given at [https://maxwestphal.github.io/SEPM.PUB/](https://maxwestphal.github.io/SEPM.PUB/).
+[![Project Status: Inactive – The project has reached a stable, usable
+state but is no longer being actively developed; support/maintenance
+will be provided as time
+allows.](https://www.repostatus.org/badges/latest/inactive.svg)](https://www.repostatus.org/#inactive)
+
+------------------------------------------------------------------------
+
+## Overview
+
+This **R project** contains a collection of research results in the
+context of model evaluation for machine-learned prediction models. In particular, 
+the goal is to allow reproduction of the numerical experiments.
+
+Several research projects (papers) are listed below for which different
+numerical experiments in the form of real world data analyses (RWD) and
+simulation studies (SIM) are described.
+
+
+------------------------------------------------------------------------
+
+## Installation
+
+To clone this repository and create a local copy use
+
+    git clone https://github.com/maxwestphal/SEPM.PUB
+
+------------------------------------------------------------------------
+
+## Dependencies
+
+The dependencies are managed with with the renv package. To activate the
+environment use the following commands in R.
+
+    install.packages("renv")
+    renv::activate()
+
+R version R 4.1.2 or newer is recommended to use this project.
+
+Code reproducibility has been tested on Windows 10. Rudimentary tests
+(R-CMD-check, see R packages) have also been conducted on macOS and
+ubuntu.
+
+------------------------------------------------------------------------
+
+## Research projects
+
+### **EOMPM**: Evaluation of multiple prediction models
+
+The earlier, independent repository
+<https://github.com/maxwestphal/EOMPM> contains numerical experiments
+related to model evaluation in machine learning conducted by **Westphal
+& Brannath (2020)**.
+
+### **IMS**: Improving model selection in supervised ML
+
+In this project, the complete machine learning and evaluation pipeline
+is emulated:
+
+1.  **Training:** Prediction models are trained by different machine
+    learning algorithms.
+2.  **Validation:** A single or multiple models are chosen for an
+    evaluation study.
+3.  **Evaluation:** The selected models are tested for a sufficiently
+    high performance.
+
+The main novelty of our investigation is that the evaluation study is
+not restricted to only be conducted for a single (pre-specified) model
+which is the usual recommendation in the ML literature **(Westphal &
+Brannath, 2019)**. As a consequence, statistical methods are needed to
+adjust for the introduced overoptimism due to the overlap of model
+selection and evaluation (based on the test data).
+
+-   **SIM/MLE\_SIM\_ACC**: Simulation study: Selection of prediction
+    models, extensive results report at
+    [MLE\_SIM\_ACC](https://maxwestphal.github.io/SEPM.PUB/MLE_SIM_ACC.html)
+
+### **SIMPle**: Simultaneous inference for multiple proportions
+
+Numerical experiments to assess the coverage probability of multivariate
+Beta-Binomial credible regions under different prior distributions
+**(Westphal, 2019)**:
+
+-   **SIM/MBB\_SIM\_ACC**: assessment of different different methods to
+    construct credible region in the multivariate beta-binomial model
+
+### **CPE**: Co-primary endpoint analysis
+
+This is a follow-up of the **IMS** project. Again, we investigate how to
+improve model evaluation studies in the supervised machine learning
+context. Instead of looking at the overall accuracy of binary
+classifiers, we now focus on the so-called co-primary endpoint analysis
+**(Westphal, Zapf, Brannath, 2019)**. Hereby, a novel prediction model
+is required to have a sufficiently high sensitivity and specificity at
+the same time.
+
+-   **SIM/MLE\_SIM\_CPE**: Simulation study: Co-primary endpoint
+    analysis of sensitivity and specificity of multiple prediction
+    models
+-   **SIM/LFC\_SIM\_CPE**: Simulation study: Co-primary endpoint
+    analysis of sensitivity and specificity under least-favorable
+    configurations
+-   **RWD/CTG2**: Real world data example: Screening for abnormal fetal
+    state (assessment of sensitivity and specificity)
+
+------------------------------------------------------------------------
+
+## R Packages
+
+-   The [SIMPle](https://github.com/maxwestphal/SIMPle) package allows
+    to conduct inference for a multivariate Bayesian beta-binomial
+    model.
+-   The [SEPM](https://github.com/maxwestphal/SEPM) package implements
+    functions related to model selection, performance estimation and
+    statistical testing for the purpose of model evaluation and
+    comparison studies.
+-   The [SEPM.SIM](https://github.com/maxwestphal/SEPM.SIM) package
+    contains all functions for the simulations in the machine learning
+    (MLE), multivariate beta binomial (MBB) and least-favorable
+    configuration (LFC) settings. Re-implementation of earlier packages
+    SEPM.MLE and SEPM.SYN.
+
+------------------------------------------------------------------------
+
+## References
+
+-   [**Westphal, Zapf,
+    Brannath (2019)**](https://arxiv.org/abs/1911.02982): Westphal, Max,
+    Antonia Zapf, and Werner Brannath. “A multiple testing framework for
+    diagnostic accuracy studies with co-primary endpoints.” arXiv
+    preprint arXiv:1911.02982 (2019).
+-   [**Westphal &
+    Brannath (2020)**](https://journals.sagepub.com/doi/full/10.1177/0962280219854487):
+    Westphal, M. and Brannath, W. Evaluation of multiple prediction
+    models: a novel view on model selection and performance assessment.
+    Statistical Methods in Medical Research, forthcoming 2019.
+-   [**Westphal (2019)**](https://arxiv.org/abs/1911.00098):
+    Simultaneous Inference for Multiple Proportions: A Multivariate
+    Beta-Binomial Model. arxiv preprint, 2019.
+-   [**Westphal &
+    Brannath (2019)**](http://proceedings.mlr.press/v97/westphal19a.html):
+    Westphal, M. and Brannath, W. Improving Model Selection by Employing
+    the Test Data. In Proceedings of the 36th International Conference
+    on Machine Learning, Long Beach, California, PMLR 97, 2019.
